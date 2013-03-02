@@ -1,7 +1,7 @@
-import datetime
-
 from django.contrib.contenttypes.models import ContentType
 from django.db.models import get_model
+from django.utils import six
+from django.utils import timezone
 
 
 class DjangoProxy(object):
@@ -9,7 +9,7 @@ class DjangoProxy(object):
     _field_mappings = [
         ('title', None),
         ('description', None),
-        ('pub_date', datetime.datetime.now()),
+        ('pub_date', timezone.now),
         ('tags', None),
     ]
     content_object = None
@@ -79,7 +79,7 @@ class DjangoProxy(object):
     def get_active(self):
         active = False
         if hasattr(self.content_object.ProxyMeta, 'active'):
-            if isinstance(self.content_object.ProxyMeta.active, basestring):
+            if isinstance(self.content_object.ProxyMeta.active, six.string_types):
                 active_field = getattr(self.content_object, self.content_object.ProxyMeta.active)
                 if callable(active_field):
                     active_field = active_field()

@@ -1,8 +1,25 @@
 from django.db.models import Manager
-import datetime
+from django.db.models.query import QuerySet
+from django.utils import timezone
 
-class PublicManager(Manager):
-    '''Retrieve all published objects.'''
-    
+
+class ProxyQuerySet(QuerySet):
+
+    def private(self):
+        return self.exclude(pub_date__isnull=True)
+
     def published(self):
-        return self.get_query_set().filter(pub_date__lte=datetime.datetime.now())
+        return self.filter(pub_date__lte=timezone.now())
+
+
+class ProxyManager(Manager):
+    """Retrieve all published objects."""
+
+    def get_query_set(self):
+        return ProxyQuerySet(self.model, using=self._db)
+
+    def private(self):
+        return self.get_query_set().private()
+
+    def published(self):
+        return self.get_query_set().published()

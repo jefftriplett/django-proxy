@@ -1,10 +1,13 @@
-from django.db import models
 from django.contrib.contenttypes import generic
 from django.contrib.contenttypes.models import ContentType
-from datetime import datetime
-from django_proxy.managers import PublicManager
+from django.db import models
+from django.utils import timezone
+from django.utils.encoding import python_2_unicode_compatible
+
+from .managers import ProxyManager
 
 
+@python_2_unicode_compatible
 class ProxyBase(models.Model):
     """
     Represents the proxy objects. Retains the name, description, and any tags
@@ -22,26 +25,24 @@ class ProxyBase(models.Model):
     title = models.CharField(max_length=255, blank=True, null=True)
     description = models.TextField(blank=True, null=True)
     tags = models.CharField(max_length=255, blank=True, null=True)
-    pub_date = models.DateTimeField(default=datetime.now)
+    pub_date = models.DateTimeField(default=timezone.now)
 
     #audit fields
-    created_on = models.DateTimeField(default=datetime.now)
-    updated_on = models.DateTimeField(default=datetime.now)
-
-    objects = PublicManager()
-
-    def __unicode__(self):
-        return '%s' % self.title
+    created_on = models.DateTimeField(default=timezone.now)
+    updated_on = models.DateTimeField(default=timezone.now)
 
     class Meta:
         abstract = True
 
+    def __str__(self):
+        return self.title
+
     def save(self, *args, **kwargs):
-        self.updated_on = datetime.now()
+        self.updated_on = timezone.now()
         super(ProxyBase, self).save(*args, **kwargs)
 
 
 class Proxy(ProxyBase):
-    '''The default proxy model.'''
-    pass
+    """The default proxy model."""
 
+    objects = ProxyManager()

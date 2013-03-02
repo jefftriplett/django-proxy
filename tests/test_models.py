@@ -1,10 +1,8 @@
-import datetime
-
 from django.test import TestCase
-
+from django.utils import timezone
 from django_proxy.models import Proxy
 
-from tests.models import *
+from .models import *
 
 
 class BasicTests(TestCase):
@@ -12,7 +10,7 @@ class BasicTests(TestCase):
     def test_models_with_status(self):
         proxy_count = Proxy.objects.count()
         self.assertEqual(proxy_count, 0)
-        now = datetime.datetime.now()
+        now = timezone.now()
 
         post = PostWithStatus()
         post.title = 'test title 1'
@@ -44,11 +42,10 @@ class BasicTests(TestCase):
 
         PostWithStatus.objects.all().delete()
 
-
     def test_models_with_boolean(self):
         proxy_count = Proxy.objects.count()
         self.assertEqual(proxy_count, 0)
-        now = datetime.datetime.now()
+        now = timezone.now()
 
         post = PostBoolean()
         post.title = 'test title 2'
@@ -80,11 +77,10 @@ class BasicTests(TestCase):
 
         PostBoolean.objects.all().delete()
 
-
     def test_models_with_methods(self):
         proxy_count = Proxy.objects.count()
         self.assertEqual(proxy_count, 0)
-        now = datetime.datetime.now()
+        now = timezone.now()
 
         post = PostWithMethod()
         post.title = 'test title 3'

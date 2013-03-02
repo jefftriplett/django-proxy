@@ -17,7 +17,7 @@ TEST_MODULES = ["tests.base"]
 
 def run_tests():
     setup_test_environment()
-    db_name = settings.DATABASE_NAME
+    db_name = settings.DATABASES['default']
     suite = unittest.TestSuite()
     for module_name in TEST_MODULES:
         module = import_module(module_name)

@@ -1,15 +1,13 @@
-import datetime
-import unittest
-
-from django.core import signals
 from django.db import models
 from django.db.models import signals
+from django.utils import timezone
+from django.utils.encoding import python_2_unicode_compatible
 from django.utils.translation import ugettext_lazy as _
 
-from django_proxy.models import Proxy
 from django_proxy.signals import proxy_save, proxy_delete
 
 
+@python_2_unicode_compatible
 class BasePost(models.Model):
     title = models.CharField(_('title'), max_length=200)
     slug = models.SlugField(_('slug'), unique_for_date='publish')
@@ -19,13 +17,14 @@ class BasePost(models.Model):
 
     class Meta:
         abstract = True
-        ordering  = ('-publish',)
+        ordering = ('-publish',)
         get_latest_by = 'publish'
 
-    def __unicode__(self):
-        return u'%s' % self.title
+    def __str__(self):
+        return self.title
 
 
+@python_2_unicode_compatible
 class PostWithStatus(BasePost):
     """ PostWithStatus model """
     DRAFT_STATUS = 1
@@ -44,6 +43,7 @@ class PostWithStatus(BasePost):
         tags = 'tag_data'
 
 
+@python_2_unicode_compatible
 class PostBoolean(BasePost):
     """ PostBoolean model """
     status = models.BooleanField(default=True)
@@ -56,6 +56,7 @@ class PostBoolean(BasePost):
         tags = 'tag_data'
 
 
+@python_2_unicode_compatible
 class PostWithMethod(BasePost):
     """ PostWithMethod model """
     status = models.BooleanField(default=True)
@@ -63,7 +64,7 @@ class PostWithMethod(BasePost):
     class ProxyMeta:
         title = 'get_title'
         description = 'get_description'
-        #pub_date = 'get_publish'
+        pub_date = 'get_publish'
         active = 'get_active'
         tags = 'get_tags'
 
@@ -74,7 +75,7 @@ class PostWithMethod(BasePost):
         return '--%s--' % self.body
 
     def get_publish(self):
-        return '--%s--' % self.publish
+        return timezone.now()
 
     def get_title(self):
         return '--%s--' % self.title
