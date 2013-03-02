@@ -8,11 +8,10 @@ if not 'DJANGO_SETTINGS_MODULE' in os.environ:
 
 from django.conf import settings
 from django.db import connection
-from django.test.utils import setup_test_environment
-from django.test.utils import teardown_test_environment
+from django.test.utils import setup_test_environment, teardown_test_environment
 from django.utils.importlib import import_module
 
-TEST_MODULES = ["tests.base"]
+TEST_MODULES = ['tests.base']
 
 
 def run_tests():
@@ -28,5 +27,5 @@ def run_tests():
     teardown_test_environment()
 
 
-if __name__ == "__main__":
+if __name__ == '__main__':
     run_tests()
