@@ -42,6 +42,7 @@ class ProxyBase(models.Model):
         super(ProxyBase, self).save(*args, **kwargs)
 
 
+@python_2_unicode_compatible
 class Proxy(ProxyBase):
     """The default proxy model."""
 
