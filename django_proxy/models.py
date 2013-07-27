@@ -47,3 +47,7 @@ class Proxy(ProxyBase):
     """The default proxy model."""
 
     objects = ProxyManager()
+
+    class Meta:
+        verbose_name = 'proxy'
+        verbose_name_plural = 'proxies'
