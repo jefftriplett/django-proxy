@@ -3,7 +3,7 @@ django-proxy
 
 .. image:: https://travis-ci.org/jefftriplett/django-proxy.png?branch=master
    :alt: Build Status
-   :target: https://travis-ci.org/jefftriplett/staticserve
+   :target: https://travis-ci.org/jefftriplett/django-proxy
 
 
 Introduction
