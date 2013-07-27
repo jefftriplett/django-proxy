@@ -1,9 +1,9 @@
 django-proxy
 ============
 
-.. image:: jefftriplett/django-proxy.png?branch=master
+.. image:: https://travis-ci.org/jefftriplett/django-proxy.png?branch=master
    :alt: Build Status
-   :target: https://travis-ci.org/pydanny/staticserve
+   :target: https://travis-ci.org/jefftriplett/staticserve
 
 
 Introduction
