@@ -25,6 +25,5 @@ branches:
 
 matrix:
   allow_failures:
-    - env:
-        - TOXENV=py33-django15
-        - TOXENV=py33-django16
+    - env: TOXENV=py33-django15
+    - env: TOXENV=py33-django16
