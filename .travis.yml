@@ -1,13 +1,27 @@
 language: python
+
 python:
-    - "2.6"
     - "2.7"
+
 env:
-    - DJANGO="Django>=1.4,<1.5"
-    - DJANGO="Django==1.5"
+    - TOXENV=py26-django14
+    - TOXENV=py26-django15
+    - TOXENV=py26-django16
+    - TOXENV=py27-django14
+    - TOXENV=py27-django15
+    - TOXENV=py27-django16
+    - TOXENV=py33-django15
+
 install:
-    - pip install -q $DJANGO --use-mirrors
-    - pip install -q coverage --use-mirrors
+    - pip install tox --use-mirrors
+
 script:
-    - coverage run manage.py test
-    - coverage report
+    - tox
+
+branches:
+  only:
+    - master
+
+matrix:
+  allow_failures:
+    - env: TOXENV=py33-django15
