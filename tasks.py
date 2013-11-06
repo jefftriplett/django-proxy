@@ -19,6 +19,7 @@ def package_test():
     run('python setup.py bdist_wheel -r test')
 
 
+@task
 def package_test_upload():
     run('python setup.py sdist upload -r test')
     run('python setup.py bdist_wheel upload -r test')
