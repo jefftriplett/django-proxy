@@ -10,8 +10,10 @@ env:
     - TOXENV=py27-django14
     - TOXENV=py27-django15
     - TOXENV=py27-django16
-    - TOXENV=py33-django15
-    - TOXENV=py33-django16
+    - TOXENV=py27-django-dev
+    #- TOXENV=py33-django15
+    #- TOXENV=py33-django16
+    #- TOXENV=py33-django-dev
 
 install:
     - pip install tox --use-mirrors
@@ -27,3 +29,9 @@ matrix:
   allow_failures:
     - env: TOXENV=py33-django15
     - env: TOXENV=py33-django16
+    - env: TOXENV=py33-django-dev
+
+after_success:
+  - coverage report
+  - pip install --quiet --use-mirrors python-coveralls
+  - coveralls
