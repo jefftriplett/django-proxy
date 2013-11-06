@@ -1,4 +1,4 @@
-from distutils.core import setup
+from setuptools import setup
 
 setup(
     name='django-proxy',
@@ -10,6 +10,7 @@ setup(
     maintainer_email='jeff.triplett@gmail.com',
     url='http://github.com/jefftriplett/django-proxy',
     packages=['django_proxy'],
+    py_modules=['django_proxy'],
     classifiers=[
         'Development Status :: 3 - Alpha',
         'Environment :: Web Environment',

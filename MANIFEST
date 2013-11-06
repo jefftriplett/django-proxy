@@ -4,6 +4,7 @@ LICENSE
 MANIFEST
 README.rst
 runtests.py
+setup.cfg
 setup.py
 tasks.py
 django_proxy/__init__.py
