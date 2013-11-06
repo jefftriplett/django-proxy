@@ -7,7 +7,6 @@ from django.utils.encoding import python_2_unicode_compatible
 from .managers import ProxyManager
 
 
-@python_2_unicode_compatible
 class ProxyBase(models.Model):
     """
     Represents the proxy objects. Retains the name, description, and any tags
@@ -34,9 +33,6 @@ class ProxyBase(models.Model):
     class Meta:
         abstract = True
 
-    def __str__(self):
-        return self.title
-
     def save(self, *args, **kwargs):
         self.updated_on = timezone.now()
         super(ProxyBase, self).save(*args, **kwargs)
@@ -51,3 +47,6 @@ class Proxy(ProxyBase):
     class Meta:
         verbose_name = 'proxy'
         verbose_name_plural = 'proxies'
+
+    def __str__(self):
+        return self.title

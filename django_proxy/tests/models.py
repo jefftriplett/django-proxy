@@ -7,7 +7,6 @@ from django.utils.translation import ugettext_lazy as _
 from django_proxy.signals import proxy_save, proxy_delete
 
 
-@python_2_unicode_compatible
 class BasePost(models.Model):
     title = models.CharField(_('title'), max_length=200)
     slug = models.SlugField(_('slug'), unique_for_date='publish')
@@ -19,9 +18,6 @@ class BasePost(models.Model):
         abstract = True
         ordering = ('-publish',)
         get_latest_by = 'publish'
-
-    def __str__(self):
-        return self.title
 
 
 @python_2_unicode_compatible
@@ -42,6 +38,9 @@ class PostWithStatus(BasePost):
         pub_date = 'publish'
         tags = 'tag_data'
 
+    def __str__(self):
+        return self.title
+
 
 @python_2_unicode_compatible
 class PostBoolean(BasePost):
@@ -55,6 +54,9 @@ class PostBoolean(BasePost):
         active = 'status'
         tags = 'tag_data'
 
+    def __str__(self):
+        return self.title
+
 
 @python_2_unicode_compatible
 class PostWithMethod(BasePost):
@@ -67,6 +69,9 @@ class PostWithMethod(BasePost):
         pub_date = 'get_publish'
         active = 'get_active'
         tags = 'get_tags'
+
+    def __str__(self):
+        return self.title
 
     def get_active(self):
         return self.status
