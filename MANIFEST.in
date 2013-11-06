@@ -3,4 +3,4 @@ include *.rst
 include AUTHORS
 include LICENSE
 include MANIFEST
-recursive-include django_proxy *.py
+include django_proxy/*.py
