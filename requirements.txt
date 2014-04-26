@@ -1,1 +1,6 @@
+bumpversion
+check-manifest
 coverage
+invoke
+tox
+wheel
