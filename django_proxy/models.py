@@ -7,7 +7,7 @@ from django.utils.encoding import python_2_unicode_compatible
 from .managers import ProxyManager
 
 
-class ProxyBase(models.Model):
+class ProxyMixin(models.Model):
     """
     Represents the proxy objects. Retains the name, description, and any tags
     related to the associated object.
@@ -35,11 +35,11 @@ class ProxyBase(models.Model):
 
     def save(self, *args, **kwargs):
         self.updated_on = timezone.now()
-        super(ProxyBase, self).save(*args, **kwargs)
+        super(ProxyMixin, self).save(*args, **kwargs)
 
 
 @python_2_unicode_compatible
-class Proxy(ProxyBase):
+class Proxy(ProxyMixin):
     """The default proxy model."""
 
     objects = ProxyManager()
