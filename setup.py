@@ -2,7 +2,7 @@ from setuptools import setup
 
 setup(
     name='django-proxy',
-    version='0.3.0',
+    version='0.4.0',
     description='This is a content aggregation solution via proxy intermediary models.',
     author='Kevin Fricovsky',
     author_email='kevin@montylounge.com',
